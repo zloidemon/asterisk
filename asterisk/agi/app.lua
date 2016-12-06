@@ -139,6 +139,11 @@ end
 -- Asterisk applications which calls by EXEC agi command
 ]]--
 
+local function saydigits(self, opts, data)
+    local command = string.format('EXEC SayDigits %d', data)
+    return self:run(command, opts)
+end
+
 local function dial(self, opts, fmt, ...)
     local data    = string.format(fmt, ...)
     local command = string.format('EXEC Dial "%s"', data)
@@ -252,6 +257,7 @@ return {
     tdd_mode = tdd_mode,
     verbose = verbose,
 
+    saydigits = saydigits,
     dial = dial,
     wait = wait,
     echo = echo,
